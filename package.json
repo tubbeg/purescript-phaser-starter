@@ -14,5 +14,8 @@
   "description": "",
   "dependencies": {
     "phaser": "^3.87.0"
+  },
+  "devDependencies": {
+    "vite": "^6.0.7"
   }
 }
