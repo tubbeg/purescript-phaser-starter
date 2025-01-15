@@ -38,10 +38,36 @@ export const createScene = sceneConfig => p => c => u => {
     return new SceneExt(sceneConfig, p, c, u);
 }
 
-//I am actually not creating a separate type to represent the game
-//Instead it is represented as an Effect Unit. Seems to work (so far)
+//Represented with an Effect Game. Seems to work (so far)
 export const createGame = (gameConfig) => () => {
     return new Game(gameConfig);
 }
 
+export const setUrl = scene => url => () => {scene.load.setBaseURL(url);}
+
+export const loadImage = scene => id => path => () => {scene.load.image(id,path);}
+
+export const addImage = scene => x => y => id => () => {scene.add.image(x,y,id);}
+
 export const auto = AUTO;
+
+export const addParticles = scene => l => () =>
+        {
+            const p = scene.add.particles(0, 0, 'red', {
+                    speed: 100,
+                    scale: { start: 1, end: 0 },
+                    blendMode: 'ADD'
+                });
+            p.startFollow(l);
+            return p;
+    }
+
+
+export const createLogo = scene => () =>
+    {
+        const logo = scene.physics.add.image(400, 100, 'logo');
+        logo.setVelocity(100, 200);
+        logo.setBounce(1, 1);
+        logo.setCollideWorldBounds(true);
+        return logo;
+    }
